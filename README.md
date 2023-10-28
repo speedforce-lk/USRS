@@ -35,12 +35,6 @@ Acrivate V.E.
 4840_env\Scripts\activate.bat
 ```
 
-# Test Django Admin
-
-User : yasas
-
-Password : admin@YP
-
 # Resoruses 
 
 https://cdnjs.com/libraries/font-awesome
