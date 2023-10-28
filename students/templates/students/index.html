@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+        <title>Student Management System</title> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+        <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+    
+        <body class="d-flex flex-column min-vh-100">
+        <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#"><i class="fa-solid fa-building-columns"></i> USMS by, 4840</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto">
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa-solid fa-list"></i> All Students</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa-solid fa-plus"></i> Add Student</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+          </nav>
+          <div class="container-fluid">
+            <h3 class="m-4">All Students</h3>
+            <div class="row">
+                <div class="col-12">
+                    {% if students %}
+
+                    <div class="card bg-light ms-4 me-4 mb-4">
+                        <div class="card-header">
+                            <i class="fa-solid fa-list"></i>Student Records</div>
+                        <div class="card-body">
+                          
+                          <p class="card-text">
+                            <div class="table-reponsive">
+
+                                <table class="table table-hover">
+                                    <thead>
+                                      <tr>
+                                        
+                                        <th scope="col">Index Number</th>
+                                        <th scope="col">Reg Number</th>
+                                        <th scope="col">Frist Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Feild Of Study</th>
+                                        <th scope="col">GPA</th>
+                                        <th scope="col">Action</th>
+
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for students in students %}
+                                      <tr class="table-info">
+                                            
+                                            <td>{{ students.index_number }}</td>
+                                            <td>{{ students.reg_number }}</td>
+                                            <td>{{ students.first_name }}</td>
+                                            <td>{{ students.last_name }}</td>
+                                            <td>{{ students.email }}</td>
+                                            <td>{{ students.field_of_study }}</td>
+                                            <td>{{ students.gpa }}</td>
+                                            <td>
+                                              <button type="button" class="btn btn-success" href="{% url 'view_student' id=student.id %}" data-bs-toggle="modal" data-bs-target="#myModal{{student.id}}">
+                                                <i class="fa-solid fa-circle-info"></i>
+                                              </button>
+                                              
+                                              <!--
+                                                View Student Model
+                                              -->
+
+                                              <div class="modal" id="#myModel{{student.id}}" tabindex="-1" aria-labelledby="myModelLable1" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title">
+                                                        Student: {{students.first_name}} {{students.last_name}}
+                                                      </h5>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true"></span>
+                                                      </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                      <ul class="list-unstyled">
+                                                        <li>Student Index Number :<strong>{{ students.index_number }}</strong> </li>
+                                                        <li>Student Reg. Number :<strong>{{ students.reg_number }}</strong> </li>
+                                                        <li>Frist Name :<strong>{{ students.first_name }}</strong> </li>
+                                                        <li>Last Name :<strong>{{ students.last_name }}</strong> </li>
+                                                        <li>Email :<strong>{{ students.email }}</strong> </li>
+                                                        <li>Feild of Study :<strong>{{ students.field_of_study }}</strong> </li>
+                                                        <li>GPA :<strong>{{ students.gpa }}</strong> </li>
+                                                      </ul>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      
+                                                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+
+                                            </td>
+
+                                      </tr>
+
+                                      {% endfor %} 
+                                      
+                                    </tbody>
+                                  </table>
+
+                            </div>
+                          </p>
+                        </div>
+
+                    {% else %}
+
+                        <h5 class="alert alert-primary ms-4 me-4">No Student Records Here !</h5>
+
+                    {% endif %}
+                   
+                </div>
+            </div>
+          </div>
+          <footer class="mt-auto mb-4">
+            <div class="text-center">
+                <span>
+                    Copyright &copy; <script>document.write(new Date().getFullYear())</script> ASP-19-20-100.
+                </span>
+            </div>
+          </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</head>
+</html>
